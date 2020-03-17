@@ -19,7 +19,7 @@
             margin: 0;
         }
         </style>
-        <title>Emergencias</title>
+        <title> Emergencias </title>
     </head>
     <body>
         <div id="map">
@@ -57,9 +57,7 @@
                 fillOpacity: 1
               });
             }
-			var crs = new L.Proj.CRS('EPSG:3115', '+proj=tmerc +lat_0=4.59620041666667 +lon_0=-77.0775079166667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', {
-            resolutions: [2800, 1400, 700, 350, 175, 84, 42, 21, 11.2, 5.6, 2.8, 1.4, 0.7, 0.35, 0.14, 0.07],
-        });
+			
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
