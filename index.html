@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/MarkerCluster.css">
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
+		<link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -41,6 +42,8 @@
         <script src="data/vias_nomenclatura_1.js"></script>
         <script src="data/Equipamientos_salud_2.js"></script>
         <script src="data/ambulancias_3.js"></script>
+		<script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+		<script src="js/proj4.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -68,9 +71,9 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-var wmsTopoIcgc = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
-layers: 'idesc:mc_barrios'
-}).addTo(map);
+		var wmsTopoIcgc = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
+		layers: 'idesc:mc_barrios'
+		}).addTo(map);
 		
         function pop_comunas_cali_0(feature, layer) {
             layer.on({
