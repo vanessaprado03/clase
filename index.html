@@ -45,7 +45,7 @@
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
-			highlightLayer.openPopup();
+			
 
             if (e.target.feature.geometry.type === 'LineString') {
               highlightLayer.setStyle({
