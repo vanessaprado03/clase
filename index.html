@@ -68,9 +68,9 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-									var wmsTopoIcgc = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
-									layers: 'idesc:mc_barrios'
-									}).addTo(map);
+var wmsTopoIcgc = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
+layers: 'idesc:mc_barrios'
+}).addTo(map);
 		
         function pop_comunas_cali_0(feature, layer) {
             layer.on({
