@@ -415,7 +415,7 @@
         bounds_group.addLayer(layer_ambulancias_3);
         cluster_ambulancias_3.addTo(map);
 		var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos_salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> vias_nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas_cali': layer_comunas_cali_0,'<img src="legend/mapa.png" /> mapabase': layer_mapabase,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos_salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> vias_nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas_cali': layer_comunas_cali_0,'<img src="legend/mapa.png" /> mapabase': mapabase,}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: cluster_ambulancias_3,
