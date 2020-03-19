@@ -66,13 +66,12 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
 		var barriosWMS = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
 		layers: 'idesc:mc_barrios'
 		}).addTo(map);
-
+		var mapabase = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
         function pop_comunas_cali_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -416,7 +415,7 @@
         bounds_group.addLayer(layer_ambulancias_3);
         cluster_ambulancias_3.addTo(map);
 		var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos_salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> vias_nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas_cali': layer_comunas_cali_0,}).addTo(map);
+        L.control.layers(baseMaps,{layer_mapabase,'<img src="legend/ambulancias_3.png" /> ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos_salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> vias_nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas_cali': layer_comunas_cali_0,}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: cluster_ambulancias_3,
