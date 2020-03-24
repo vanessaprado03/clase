@@ -6,7 +6,8 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+		<link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/MarkerCluster.css">
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
@@ -24,8 +25,9 @@
     <body>
         <div id="map">
         </div>
+		<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
         <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
         <script src="js/multi-style-layer.js"></script>
         <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -42,6 +44,8 @@
         <script src="data/Equipamientos_salud_2.js"></script>
         <script src="data/ambulancias_3.js"></script>
         <script>
+		
+			
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
@@ -61,17 +65,30 @@
             zoomControl:true, maxZoom:28, minZoom:1
         }).fitBounds([[3.327235654507765,-76.7129322918559],[3.5102416747173115,-76.34094953985935]]);
         var hash = new L.Hash(map);
+		
+		
+		
+		
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-		var barriosWMS = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
+		
+		//Mapas base
+		
+		var mapabase1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+		}).addTo(map);
+		
+		var mapabase2barrios = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
 		layers: 'idesc:mc_barrios'
 		}).addTo(map);
-		var mapabase = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		
+		var mapabase3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
+
         function pop_comunas_cali_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -112,7 +129,7 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(241,22,4,1.0)',
+                fillColor: 'rgba(250, 209, 121,1.0)',
             }
         }
         map.createPane('pane_comunas_cali_0');
@@ -222,7 +239,7 @@
             return {
                 pane: 'pane_vias_nomenclatura_1',
                 opacity: 1,
-                color: 'rgba(4,4,4,1.0)',
+                color: 'rgba(120, 119, 117,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -305,6 +322,18 @@
         map.createPane('pane_Equipamientos_salud_2');
         map.getPane('pane_Equipamientos_salud_2').style.zIndex = 402;
         map.getPane('pane_Equipamientos_salud_2').style['mix-blend-mode'] = 'normal';
+		
+		
+		var icono = new L.Icon({
+			iconUrl: 'https://www.flaticon.es/premium-icon/icons/svg/1982/1982159.svg',
+			iconSize: [50, 50],
+			iconAnchor: [25, 50]
+		});
+		
+		var accidentalidadalta = L.marker([3.416729, -76.539979],{icon: icono}).addTo(map)
+			.bindPopup("<b>Punto de Alta Accidentalidad</b><br>Calle 9 - Carrera 44.");
+		
+				
         var layer_Equipamientos_salud_2 = new L.geoJson(json_Equipamientos_salud_2, {
             attribution: '',
             pane: 'pane_Equipamientos_salud_2',
@@ -415,7 +444,8 @@
         bounds_group.addLayer(layer_ambulancias_3);
         cluster_ambulancias_3.addTo(map);
 		var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa.png" /> Mapa Base': mapabase,}).addTo(map);
+		
+        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa1.png" /> Mapa Base 1': mapabase1,'<img src="legend/mapa2.png" /> Mapa Base 2': mapabase2barrios,'<img src="legend/mapa3.png" /> Mapa Base 3': mapabase3}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: cluster_ambulancias_3,
