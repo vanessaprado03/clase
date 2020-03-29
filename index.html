@@ -6,8 +6,11 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-		<link rel="stylesheet" href="css/L.Control.Locate.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+		  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		  crossorigin=""/>
+		
+		
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/MarkerCluster.css">
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
@@ -25,9 +28,10 @@
     <body>
         <div id="map">
         </div>
-		<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+		
         <script src="js/qgis2web_expressions.js"></script>
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script><script 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.70.0/L.Control.Locate.min.js"></script>
         <script src="js/multi-style-layer.js"></script>
         <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -43,6 +47,8 @@
         <script src="data/vias_nomenclatura_1.js"></script>
         <script src="data/Equipamientos_salud_2.js"></script>
         <script src="data/ambulancias_3.js"></script>
+		<script src="data/perimetro_urbano_cali.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
         <script>
 		
 			
@@ -81,13 +87,47 @@
 		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 		}).addTo(map);
 		
+
+		var mapabase3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+
 		var mapabase2barrios = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
 		layers: 'idesc:mc_barrios'
 		}).addTo(map);
 		
-		var mapabase3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		
+		
+		var style_perimetro = {
+		pane:'pane_perimetro',
+		radius: 8,
+		fillColor: "#ff7800",
+		color: "#000",
+		weight: 1,
+		opacity: 1,
+		fillOpacity: 0.8
+			
+		}
+		
+		map.createPane('pane_perimetro');
+        map.getPane('pane_perimetro').style.zIndex = 400;
+        map.getPane('pane_perimetro').style['mix-blend-mode'] = 'normal';
+		
+		
+
+		var layer_perimetro_urbano = new L.geoJson(perimetro_urbano_cali, {
+		onEachFeature:function(feature,layer){layer.setStyle(style_perimetro)}	
+		
+
 		}).addTo(map);
+		
+
+		bounds_group.addLayer(layer_perimetro_urbano);
+        map.addLayer(layer_perimetro_urbano);
+		
+
+
 
         function pop_comunas_cali_0(feature, layer) {
             layer.on({
@@ -445,7 +485,7 @@
         cluster_ambulancias_3.addTo(map);
 		var baseMaps = {};
 		
-        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa1.png" /> Mapa Base 1': mapabase1,'<img src="legend/mapa2.png" /> Mapa Base 2': mapabase2barrios,'<img src="legend/mapa3.png" /> Mapa Base 3': mapabase3}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa1.png" /> Mapa Base 1': mapabase1,'<img src="legend/mapa2.png" /> Mapa Base 2': mapabase2barrios,'<img src="legend/mapa3.png" /> Mapa Base 3': mapabase3,'<img src="legend/ambulancias_3.png" /> perimetro':layer_perimetro_urbano}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: cluster_ambulancias_3,
