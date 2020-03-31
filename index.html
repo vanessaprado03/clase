@@ -34,9 +34,8 @@
 
 	   <style>
         html, body, #map {
-			float: right
-            width: 100%;
-            height: 100%;
+			width: 100%;
+            height: 95%;
             padding: 0;
             margin: 0;
         }
@@ -50,88 +49,19 @@
 			background-image: url(https://static1.squarespace.com/static/5c98f5e87980b3372c8b2493/5c9c6cb5b9fb477ea2dcb4c3/5c9c6dd3b9fb477ea2dce396/1553755603145/signs-of-church-health.jpg?format=original);
 			background-position: center center;
 		}
-		h2 {
-			margin-bottom: 10px;
-		}
-		h3 {
-			width: 310px;
-			height: 310px;
-			background-image: url(https://2.bp.blogspot.com/-EuySqYo2qos/VrLCou_OxjI/AAAAAAAAAGg/oYfPeu2_MMs/s1600/2clcwk.jpg);
-			background-position: right slow;
-		}
-		.caja {
-			display: block;
-			float:left;
-			width: 24%;
-			background-color: #8A8A8A   ;
-		}
-		textarea {
-			clear: both;
-			width: 310px;
-			height: 66px;
-		}
-		
-		#cargar {
-			margin: 20px 0 0 0;
-			font-size: 1.2em;
-		}
-		.CodeMirror {
-			border: 1px solid #FFFFFF;
-			font-size: 1.2em;
-			height: auto;
-			font-family: monospace;
-		}
 		
         </style>
-        <title> Emergencias Cali</title>
+        <title> Emergencias </title>
 		
 
     </head>
     <body>
-	<h1 style="color:#FFFFFF ";><a>Emergencias</a>: Puntos de acopio de ambulancias</h1>
-	<div class="caja">
-		<div id="controles">
-			<p>En esta página puedes cambiar las opciones del plugin y los datos CSV. Al pulsar el botón <i>Cargar datos</i> se aplicarán los cambios y podrás navegar por el mapa de la derecha</p>
-
-			<h2>CSV</h2>
-			<textarea id="csv">
-48.8566;2.3522;París, capital de Francia
-40.4168;-3.7038;Madrid, capital de España
-41.9015;12.4608;Roma, capital de Italia
-37.9837;23.7293;Atenas, capital de Grecia
-
-			</textarea>
-			<button id="cargar">Cargar datos</button>
-			<div class= "caja2"></div>
-			<h3></h3>
-		</div>
-		</div>
-		<div class="caja">
-			<div id="mapa"></div>
-		</div>
-
-	
+	<h1 style="color:#969BDF  ";><a>Emergencias</a>: Puntos de acopio de ambulancias</h1>
 	
 			<div id="map"></div>
+			<button id="cargar">Cargar datos</button>
         </div>
 		
-				<div id="opciones">
-		L.geoCsv(null,{
-		  titles: ['lat', 'lng', 'popup'],
-		  fieldSeparator: ';',
-		  lineSeparator: '\n',
-		  deleteDobleQuotes: true,
-		  firstLineTitles: false,
-		  onEachFeature: function (feature, layer) {
-			var popup = '';
-			for (var clave in feature.properties) {
-			  var title = geo_csv.getPropertyTitle(clave);
-			  popup += '<b>'+title+'</b><br />'+feature.properties[clave]+'<br /><br />';
-			}
-			layer.bindPopup(popup);
-		  }
-		});</div>
-
 		
         <script src="js/qgis2web_expressions.js"></script>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> 
@@ -175,36 +105,7 @@
             }
         }
 		
-		var opciones_editor = CodeMirror.fromTextArea(document.getElementById("opciones"), {
-		  lineNumbers: true,
-		  matchBrackets: true,
-		  mode: "text/typescript"});
-		  
-		var csv_editor = CodeMirror.fromTextArea(document.getElementById("csv"), {lineNumbers: true});
-
-		//altura del mapa al tamaño de los controles, dos columnas iguales
-		function ajusta_Altura() {
-		  var altura = document.getElementById('controles').offsetHeight
-		  document.getElementById('map').style.height = altura+20+"px";
-		}
-
-		ajusta_Altura();
 		
-		//dotamos de funcionalidad al botón cargar
-		var geo_csv = {};
-
-		function cargar() {
-		  //guardamos los cambios del usuario en sus respectivos textarea
-		  opciones_editor.save();
-		  csv_editor.save();
-		  //borramos la capa geo_csv del mapa
-		  map.removeLayer(geo_csv);
-		  //recreamos la capa con las nuevas opciones
-		  geo_csv = eval(document.getElementById('opciones').value);
-		  geo_csv.addData(document.getElementById('csv').value);
-		  map.addLayer(geo_csv);
-		}
-
 		document.getElementById('cargar').addEventListener('click', cargar, false);	
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -240,7 +141,7 @@
 		}).addTo(map);
 		
 		
-		
+
 		
 		
 		var style_perimetro = {
@@ -642,27 +543,6 @@
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
 		 
-		 //dotamos de funcionalidad al botón cargar
-		var geo_csv = {};
-
-		function cargar() {
-		  //guardamos los cambios del usuario en sus respectivos textarea
-		  opciones_editor.save();
-		  csv_editor.save();
-		  //borramos la capa geo_csv del mapa
-		  map.removeLayer(geo_csv);
-		  //recreamos la capa con las nuevas opciones
-		  geo_csv = eval(document.getElementById('opciones').value);
-		  geo_csv.addData(document.getElementById('csv').value);
-		  map.addLayer(geo_csv);
-		}
-
-		document.getElementById('cargar').addEventListener('click', cargar, false);
-		 
-
-
-		
-
 
         </script>
     </body>
