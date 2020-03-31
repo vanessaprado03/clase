@@ -6,6 +6,7 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name= "viewport" content= "width=device-width, user-scalable=no, initial-scale= 1.0, maximum-scale= 1.0, minimum-scale= 1.0">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
 		  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
 		  crossorigin=""/>
@@ -88,576 +89,577 @@
 
     </head>
     <body>
-	<h1 style="color:#FFFFFF ";><a>Emergencias</a>: Puntos de acopio de ambulancias</h1>
-	<div class="caja">
-		<div id="controles">
-			<p>En esta página puedes cambiar las opciones del plugin y los datos CSV. Al pulsar el botón <i>Cargar datos</i> se aplicarán los cambios y podrás navegar por el mapa de la derecha</p>
+		<div class= "contenedor"
+			<h1 style="color:#FFFFFF ";><a>Emergencias</a>: Puntos de acopio de ambulancias</h1>
+			<div class="caja">
+				<div id="controles">
+					<p>En esta página puedes cambiar las opciones del plugin y los datos CSV. Al pulsar el botón <i>Cargar datos</i> se aplicarán los cambios y podrás navegar por el mapa de la derecha</p>
 
-			<h2>CSV</h2>
-			<textarea id="csv">
-48.8566;2.3522;París, capital de Francia
-40.4168;-3.7038;Madrid, capital de España
-41.9015;12.4608;Roma, capital de Italia
-37.9837;23.7293;Atenas, capital de Grecia
+					<h2>CSV</h2>
+					<textarea id="csv">
+		48.8566;2.3522;París, capital de Francia
+		40.4168;-3.7038;Madrid, capital de España
+		41.9015;12.4608;Roma, capital de Italia
+		37.9837;23.7293;Atenas, capital de Grecia
 
-			</textarea>
-			<button id="cargar">Cargar datos</button>
-			<div class= "caja2"></div>
-			<h3></h3>
-		</div>
-		</div>
-		<div class="caja">
-			<div id="mapa"></div>
-		</div>
+					</textarea>
+					<button id="cargar">Cargar datos</button>
+					<div class= "caja2"></div>
+					<h3></h3>
+				</div>
+				</div>
+				<div class="caja">
+					<div id="mapa"></div>
+				</div>
 
 	
 	
-			<div id="map"></div>
-        </div>
+					<div id="map"></div>
+				</div>
 		
-				<div id="opciones">
-		L.geoCsv(null,{
-		  titles: ['lat', 'lng', 'popup'],
-		  fieldSeparator: ';',
-		  lineSeparator: '\n',
-		  deleteDobleQuotes: true,
-		  firstLineTitles: false,
-		  onEachFeature: function (feature, layer) {
-			var popup = '';
-			for (var clave in feature.properties) {
-			  var title = geo_csv.getPropertyTitle(clave);
-			  popup += '<b>'+title+'</b><br />'+feature.properties[clave]+'<br /><br />';
-			}
-			layer.bindPopup(popup);
-		  }
-		});</div>
+						<div id="opciones">
+				L.geoCsv(null,{	
+				titles: ['lat', 'lng', 'popup'],
+				fieldSeparator: ';',
+				lineSeparator: '\n',
+				deleteDobleQuotes: true,
+					firstLineTitles: false,
+				onEachFeature: function (feature, layer) {
+					var popup = '';
+					for (var clave in feature.properties) {
+					var title = geo_csv.getPropertyTitle(clave);
+					popup += '<b>'+title+'</b><br />'+feature.properties[clave]+'<br /><br />';
+					}
+					layer.bindPopup(popup);
+				}
+				});</div>
 
 		
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.70.0/L.Control.Locate.min.js"></script>
-        <script src="js/multi-style-layer.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-        <script src="js/leaflet.markercluster.js"></script>
-        <script src="js/leaflet-search.js"></script>
-        <script src="data/comunas_cali_0.js"></script>
-        <script src="data/vias_nomenclatura_1.js"></script>
-        <script src="data/Equipamientos_salud_2.js"></script>
-        <script src="data/ambulancias_3.js"></script>
-		<script src="data/perimetro_urbano_cali.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-        <script>
+				<script src="js/qgis2web_expressions.js"></script>
+				<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> 
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.70.0/L.Control.Locate.min.js"></script>
+				<script src="js/multi-style-layer.js"></script>
+				<script src="js/leaflet-svg-shape-markers.min.js"></script>
+				<script src="js/leaflet.rotatedMarker.js"></script>
+				<script src="js/leaflet.pattern.js"></script>
+				<script src="js/leaflet-hash.js"></script>
+				<script src="js/Autolinker.min.js"></script>
+				<script src="js/rbush.min.js"></script>
+				<script src="js/labelgun.min.js"></script>
+				<script src="js/labels.js"></script>
+				<script src="js/leaflet.markercluster.js"></script>
+				<script src="js/leaflet-search.js"></script>
+				<script src="data/comunas_cali_0.js"></script>
+				<script src="data/vias_nomenclatura_1.js"></script>
+				<script src="data/Equipamientos_salud_2.js"></script>
+				<script src="data/ambulancias_3.js"></script>
+				<script src="data/perimetro_urbano_cali.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+				<script>
 		
 
 		
 		
  
-        var highlightLayer;
-        function highlightFeature(e) {
-            highlightLayer = e.target;
+				var highlightLayer;
+				function highlightFeature(e) {
+					highlightLayer = e.target;
 
-            if (e.target.feature.geometry.type === 'LineString') {
-              highlightLayer.setStyle({
-                color: '#ffff00',
-              });
-            } else {
-              highlightLayer.setStyle({
-                fillColor: '#ffff00',
-                fillOpacity: 1
-              });
-            }
-        }
+					if (e.target.feature.geometry.type === 'LineString') {
+					highlightLayer.setStyle({
+						color: '#ffff00',
+					});
+					} else {
+					highlightLayer.setStyle({
+						fillColor: '#ffff00',
+						fillOpacity: 1
+						});
+					}
+				}
 		
-		var opciones_editor = CodeMirror.fromTextArea(document.getElementById("opciones"), {
-		  lineNumbers: true,
-		  matchBrackets: true,
-		  mode: "text/typescript"});
+				var opciones_editor = CodeMirror.fromTextArea(document.getElementById("opciones"), {
+				lineNumbers: true,
+				matchBrackets: true,
+				mode: "text/typescript"});
 		  
-		var csv_editor = CodeMirror.fromTextArea(document.getElementById("csv"), {lineNumbers: true});
+				var csv_editor = CodeMirror.fromTextArea(document.getElementById("csv"), {lineNumbers: true});
 
-		//altura del mapa al tamaño de los controles, dos columnas iguales
-		function ajusta_Altura() {
-		  var altura = document.getElementById('controles').offsetHeight
-		  document.getElementById('map').style.height = altura+20+"px";
-		}
+				//altura del mapa al tamaño de los controles, dos columnas iguales
+				function ajusta_Altura() {
+				var altura = document.getElementById('controles').offsetHeight
+				document.getElementById('map').style.height = altura+20+"px";
+				}
 
-		ajusta_Altura();
+				ajusta_Altura();
 		
-		//dotamos de funcionalidad al botón cargar
-		var geo_csv = {};
+				//dotamos de funcionalidad al botón cargar
+				var geo_csv = {};
 
-		function cargar() {
-		  //guardamos los cambios del usuario en sus respectivos textarea
-		  opciones_editor.save();
-		  csv_editor.save();
-		  //borramos la capa geo_csv del mapa
-		  map.removeLayer(geo_csv);
-		  //recreamos la capa con las nuevas opciones
-		  geo_csv = eval(document.getElementById('opciones').value);
-		  geo_csv.addData(document.getElementById('csv').value);
-		  map.addLayer(geo_csv);
-		}
+				function cargar() {
+				//guardamos los cambios del usuario en sus respectivos textarea
+				opciones_editor.save();
+				csv_editor.save();
+				//borramos la capa geo_csv del mapa
+				map.removeLayer(geo_csv);
+				//recreamos la capa con las nuevas opciones
+				geo_csv = eval(document.getElementById('opciones').value);
+				geo_csv.addData(document.getElementById('csv').value);
+				map.addLayer(geo_csv);
+				}
 
-		document.getElementById('cargar').addEventListener('click', cargar, false);	
-        var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[3.327235654507765,-76.7129322918559],[3.5102416747173115,-76.34094953985935]]);
-        var hash = new L.Hash(map);
+				document.getElementById('cargar').addEventListener('click', cargar, false);	
+				var map = L.map('map', {
+					zoomControl:true, maxZoom:28, minZoom:1
+				}).fitBounds([[3.327235654507765,-76.7129322918559],[3.5102416747173115,-76.34094953985935]]);
+				var hash = new L.Hash(map);
 		
 		
 		
 		
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
-        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-        }
+				map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+				L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+				var bounds_group = new L.featureGroup([]);
+				function setBounds() {
+				}
 		
-		
-
-		
-		//Mapas base
-		
-		var mapabase1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-		}).addTo(map);
 		
 
-		var mapabase3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
+		
+				//Mapas base
+		
+				var mapabase1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+				}).addTo(map);
+		
+
+				var mapabase3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
 
 
-		var mapabase2barrios = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
-		layers: 'idesc:mc_barrios'
-		}).addTo(map);
+				var mapabase2barrios = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', {
+				layers: 'idesc:mc_barrios'
+				}).addTo(map);
 		
 		
 		
 		
 		
-		var style_perimetro = {
-		pane:'pane_perimetro',
-		radius: 8,
-		fillColor: "#ff7800",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 0.8
+				var style_perimetro = {
+				pane:'pane_perimetro',
+				radius: 8,
+				fillColor: "#ff7800",
+				color: "#000",
+				weight: 1,
+				opacity: 1,
+				fillOpacity: 0.8
 			
-		}
+				}
 		
-		map.createPane('pane_perimetro');
-        map.getPane('pane_perimetro').style.zIndex = 400;
-        map.getPane('pane_perimetro').style['mix-blend-mode'] = 'normal';
+				map.createPane('pane_perimetro');
+				map.getPane('pane_perimetro').style.zIndex = 400;
+				map.getPane('pane_perimetro').style['mix-blend-mode'] = 'normal';
 		
-		
-
-		var layer_perimetro_urbano = new L.geoJson(perimetro_urbano_cali, {
-		onEachFeature:function(feature,layer){layer.setStyle(style_perimetro)}	
 		
 
-		}).addTo(map);
+				var layer_perimetro_urbano = new L.geoJson(perimetro_urbano_cali, {
+				onEachFeature:function(feature,layer){layer.setStyle(style_perimetro)}	
 		
 
-		bounds_group.addLayer(layer_perimetro_urbano);
-        map.addLayer(layer_perimetro_urbano);
+				}).addTo(map);
+		
+
+				bounds_group.addLayer(layer_perimetro_urbano);
+				map.addLayer(layer_perimetro_urbano);
 		
 
 
 
-        function pop_comunas_cali_0(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['comuna'] !== null ? Autolinker.link(String(feature.properties['comuna'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nombre'] !== null ? Autolinker.link(String(feature.properties['nombre'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['zona_recol'] !== null ? Autolinker.link(String(feature.properties['zona_recol'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['area'] !== null ? Autolinker.link(String(feature.properties['area'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['perimetro'] !== null ? Autolinker.link(String(feature.properties['perimetro'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
+				function pop_comunas_cali_0(feature, layer) {
+					layer.on({
+						mouseout: function(e) {
+							for (i in e.target._eventParents) {
+								e.target._eventParents[i].resetStyle(e.target);
+							}
+						},
+						mouseover: highlightFeature,
+					});
+					var popupContent = '<table>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['comuna'] !== null ? Autolinker.link(String(feature.properties['comuna'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nombre'] !== null ? Autolinker.link(String(feature.properties['nombre'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['zona_recol'] !== null ? Autolinker.link(String(feature.properties['zona_recol'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['area'] !== null ? Autolinker.link(String(feature.properties['area'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['perimetro'] !== null ? Autolinker.link(String(feature.properties['perimetro'])) : '') + '</td>\
+							</tr>\
+						</table>';
+					layer.bindPopup(popupContent, {maxHeight: 400});
+				}
 
-        function style_comunas_cali_0_0() {
+				function style_comunas_cali_0_0() {
+					return {
+						pane: 'pane_comunas_cali_0',
+						opacity: 1,
+						color: 'rgba(123,122,58,1.0)',
+						dashArray: '',
+						lineCap: 'butt',
+						lineJoin: 'miter',
+						weight: 1.0, 
+						fill: true,
+						fillOpacity: 1,
+						fillColor: 'rgba(250, 209, 121,1.0)',
+					}
+				}
+				map.createPane('pane_comunas_cali_0');
+				map.getPane('pane_comunas_cali_0').style.zIndex = 400;
+				map.getPane('pane_comunas_cali_0').style['mix-blend-mode'] = 'normal';
+				var layer_comunas_cali_0 = new L.geoJson(json_comunas_cali_0, {
+					attribution: '',
+					pane: 'pane_comunas_cali_0',
+					onEachFeature: pop_comunas_cali_0,
+					style: style_comunas_cali_0_0,
+				});
+				bounds_group.addLayer(layer_comunas_cali_0);
+				map.addLayer(layer_comunas_cali_0);
+				function pop_vias_nomenclatura_1(feature, layer) {
+					layer.on({
+						mouseout: function(e) {
+							for (i in e.target._eventParents) {
+								e.target._eventParents[i].resetStyle(e.target);
+							}
+						},
+						mouseover: highlightFeature,
+					});
+					var popupContent = '<table>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['oneway'] !== null ? Autolinker.link(String(feature.properties['oneway'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['ft_minutes'] !== null ? Autolinker.link(String(feature.properties['ft_minutes'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['tf_minutes'] !== null ? Autolinker.link(String(feature.properties['tf_minutes'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['hierarchy'] !== null ? Autolinker.link(String(feature.properties['hierarchy'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['velocidad'] !== null ? Autolinker.link(String(feature.properties['velocidad'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['meters'] !== null ? Autolinker.link(String(feature.properties['meters'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['id_via'] !== null ? Autolinker.link(String(feature.properties['id_via'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['comuna'] !== null ? Autolinker.link(String(feature.properties['comuna'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['id_barrio'] !== null ? Autolinker.link(String(feature.properties['id_barrio'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['barrio'] !== null ? Autolinker.link(String(feature.properties['barrio'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nom_old'] !== null ? Autolinker.link(String(feature.properties['nom_old'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nom_actual'] !== null ? Autolinker.link(String(feature.properties['nom_actual'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['tipo_via'] !== null ? Autolinker.link(String(feature.properties['tipo_via'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['num_via'] !== null ? Autolinker.link(String(feature.properties['num_via'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nom_altern'] !== null ? Autolinker.link(String(feature.properties['nom_altern'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['clase_id'] !== null ? Autolinker.link(String(feature.properties['clase_id'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nom_nueva'] !== null ? Autolinker.link(String(feature.properties['nom_nueva'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['sector_pn'] !== null ? Autolinker.link(String(feature.properties['sector_pn'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['cambia'] !== null ? Autolinker.link(String(feature.properties['cambia'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['ejecu_pn'] !== null ? Autolinker.link(String(feature.properties['ejecu_pn'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['resolucion'] !== null ? Autolinker.link(String(feature.properties['resolucion'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['observac'] !== null ? Autolinker.link(String(feature.properties['observac'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['acuerdo'] !== null ? Autolinker.link(String(feature.properties['acuerdo'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['date'] !== null ? Autolinker.link(String(feature.properties['date'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['tipo_cambi'] !== null ? Autolinker.link(String(feature.properties['tipo_cambi'])) : '') + '</td>\
+							</tr>\
+						</table>';
+					layer.bindPopup(popupContent, {maxHeight: 400});
+				}
+
             return {
-                pane: 'pane_comunas_cali_0',
-                opacity: 1,
-                color: 'rgba(123,122,58,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(250, 209, 121,1.0)',
-            }
-        }
-        map.createPane('pane_comunas_cali_0');
-        map.getPane('pane_comunas_cali_0').style.zIndex = 400;
-        map.getPane('pane_comunas_cali_0').style['mix-blend-mode'] = 'normal';
-        var layer_comunas_cali_0 = new L.geoJson(json_comunas_cali_0, {
-            attribution: '',
-            pane: 'pane_comunas_cali_0',
-            onEachFeature: pop_comunas_cali_0,
-            style: style_comunas_cali_0_0,
-        });
-        bounds_group.addLayer(layer_comunas_cali_0);
-        map.addLayer(layer_comunas_cali_0);
-        function pop_vias_nomenclatura_1(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['oneway'] !== null ? Autolinker.link(String(feature.properties['oneway'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ft_minutes'] !== null ? Autolinker.link(String(feature.properties['ft_minutes'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['tf_minutes'] !== null ? Autolinker.link(String(feature.properties['tf_minutes'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['hierarchy'] !== null ? Autolinker.link(String(feature.properties['hierarchy'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['velocidad'] !== null ? Autolinker.link(String(feature.properties['velocidad'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['meters'] !== null ? Autolinker.link(String(feature.properties['meters'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['id_via'] !== null ? Autolinker.link(String(feature.properties['id_via'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['comuna'] !== null ? Autolinker.link(String(feature.properties['comuna'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['id_barrio'] !== null ? Autolinker.link(String(feature.properties['id_barrio'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['barrio'] !== null ? Autolinker.link(String(feature.properties['barrio'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nom_old'] !== null ? Autolinker.link(String(feature.properties['nom_old'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nom_actual'] !== null ? Autolinker.link(String(feature.properties['nom_actual'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['tipo_via'] !== null ? Autolinker.link(String(feature.properties['tipo_via'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['num_via'] !== null ? Autolinker.link(String(feature.properties['num_via'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nom_altern'] !== null ? Autolinker.link(String(feature.properties['nom_altern'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['clase_id'] !== null ? Autolinker.link(String(feature.properties['clase_id'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nom_nueva'] !== null ? Autolinker.link(String(feature.properties['nom_nueva'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['sector_pn'] !== null ? Autolinker.link(String(feature.properties['sector_pn'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['cambia'] !== null ? Autolinker.link(String(feature.properties['cambia'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ejecu_pn'] !== null ? Autolinker.link(String(feature.properties['ejecu_pn'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['resolucion'] !== null ? Autolinker.link(String(feature.properties['resolucion'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['observac'] !== null ? Autolinker.link(String(feature.properties['observac'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['acuerdo'] !== null ? Autolinker.link(String(feature.properties['acuerdo'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['date'] !== null ? Autolinker.link(String(feature.properties['date'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['tipo_cambi'] !== null ? Autolinker.link(String(feature.properties['tipo_cambi'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
+				function style_vias_nomenclatura_1_0() {
+						pane: 'pane_vias_nomenclatura_1',
+						opacity: 1,
+						color: 'rgba(120, 119, 117,1.0)',
+						dashArray: '',
+						lineCap: 'square',
+						lineJoin: 'bevel',
+						weight: 1.0,
+						fillOpacity: 0,
+					}
+				}
+				map.createPane('pane_vias_nomenclatura_1');
+				map.getPane('pane_vias_nomenclatura_1').style.zIndex = 401;
+				map.getPane('pane_vias_nomenclatura_1').style['mix-blend-mode'] = 'normal';
+				var layer_vias_nomenclatura_1 = new L.geoJson(json_vias_nomenclatura_1, {
+					attribution: '',
+					pane: 'pane_vias_nomenclatura_1',
+					onEachFeature: pop_vias_nomenclatura_1,
+					style: style_vias_nomenclatura_1_0,
+				});
+				bounds_group.addLayer(layer_vias_nomenclatura_1);
+				map.addLayer(layer_vias_nomenclatura_1);
+				function pop_Equipamientos_salud_2(feature, layer) {
+					layer.on({
+						mouseout: function(e) {
+							for (i in e.target._eventParents) {
+								e.target._eventParents[i].resetStyle(e.target);
+							}
+						},
+						mouseover: highlightFeature,
+					});
+					var popupContent = '<table>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nombre'] !== null ? Autolinker.link(String(feature.properties['nombre'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['localizaci'] !== null ? Autolinker.link(String(feature.properties['localizaci'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['servicio'] !== null ? Autolinker.link(String(feature.properties['servicio'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['nivel'] !== null ? Autolinker.link(String(feature.properties['nivel'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['propiedad'] !== null ? Autolinker.link(String(feature.properties['propiedad'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['tipos_de_e'] !== null ? Autolinker.link(String(feature.properties['tipos_de_e'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['categoria'] !== null ? Autolinker.link(String(feature.properties['categoria'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['escala'] !== null ? Autolinker.link(String(feature.properties['escala'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['permanenci'] !== null ? Autolinker.link(String(feature.properties['permanenci'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['estruc_eco'] !== null ? Autolinker.link(String(feature.properties['estruc_eco'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['url1'] !== null ? Autolinker.link(String(feature.properties['url1'])) : '') + '</td>\
+							</tr>\
+						</table>';
+					layer.bindPopup(popupContent, {maxHeight: 400});
+				}
 
-        function style_vias_nomenclatura_1_0() {
-            return {
-                pane: 'pane_vias_nomenclatura_1',
-                opacity: 1,
-                color: 'rgba(120, 119, 117,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-            }
-        }
-        map.createPane('pane_vias_nomenclatura_1');
-        map.getPane('pane_vias_nomenclatura_1').style.zIndex = 401;
-        map.getPane('pane_vias_nomenclatura_1').style['mix-blend-mode'] = 'normal';
-        var layer_vias_nomenclatura_1 = new L.geoJson(json_vias_nomenclatura_1, {
-            attribution: '',
-            pane: 'pane_vias_nomenclatura_1',
-            onEachFeature: pop_vias_nomenclatura_1,
-            style: style_vias_nomenclatura_1_0,
-        });
-        bounds_group.addLayer(layer_vias_nomenclatura_1);
-        map.addLayer(layer_vias_nomenclatura_1);
-        function pop_Equipamientos_salud_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nombre'] !== null ? Autolinker.link(String(feature.properties['nombre'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['localizaci'] !== null ? Autolinker.link(String(feature.properties['localizaci'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['servicio'] !== null ? Autolinker.link(String(feature.properties['servicio'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nivel'] !== null ? Autolinker.link(String(feature.properties['nivel'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['propiedad'] !== null ? Autolinker.link(String(feature.properties['propiedad'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['tipos_de_e'] !== null ? Autolinker.link(String(feature.properties['tipos_de_e'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['categoria'] !== null ? Autolinker.link(String(feature.properties['categoria'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['escala'] !== null ? Autolinker.link(String(feature.properties['escala'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['permanenci'] !== null ? Autolinker.link(String(feature.properties['permanenci'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['estruc_eco'] !== null ? Autolinker.link(String(feature.properties['estruc_eco'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['url1'] !== null ? Autolinker.link(String(feature.properties['url1'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Equipamientos_salud_2_0() {
-            return {
-                pane: 'pane_Equipamientos_salud_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(12,204,252,1.0)',
-            }
-        }
-        map.createPane('pane_Equipamientos_salud_2');
-        map.getPane('pane_Equipamientos_salud_2').style.zIndex = 402;
-        map.getPane('pane_Equipamientos_salud_2').style['mix-blend-mode'] = 'normal';
-		
-		
-		var icono = new L.Icon({
-			iconUrl: 'https://www.flaticon.es/premium-icon/icons/svg/1982/1982159.svg',
-			iconSize: [50, 50],
-			iconAnchor: [25, 50]
-		});
-		
-		var accidentalidadalta = L.marker([3.416729, -76.539979],{icon: icono}).addTo(map)
-			.bindPopup("<b>Punto de Alta Accidentalidad</b><br>Calle 9 - Carrera 44.");
-		
+				function style_Equipamientos_salud_2_0() {
+					return {
+						pane: 'pane_Equipamientos_salud_2',
+						opacity: 1,
+						color: 'rgba(35,35,35,1.0)',
+						dashArray: '',
+						lineCap: 'butt',
+						lineJoin: 'miter',
+						weight: 1.0, 
+						fill: true,
+						fillOpacity: 1,
+						fillColor: 'rgba(12,204,252,1.0)',
+					}
+				}
+				map.createPane('pane_Equipamientos_salud_2');
+				map.getPane('pane_Equipamientos_salud_2').style.zIndex = 402;
+				map.getPane('pane_Equipamientos_salud_2').style['mix-blend-mode'] = 'normal';
 				
-        var layer_Equipamientos_salud_2 = new L.geoJson(json_Equipamientos_salud_2, {
-            attribution: '',
-            pane: 'pane_Equipamientos_salud_2',
-            onEachFeature: pop_Equipamientos_salud_2,
-            style: style_Equipamientos_salud_2_0,
-        });
-        bounds_group.addLayer(layer_Equipamientos_salud_2);
-        map.addLayer(layer_Equipamientos_salud_2);
-        function pop_ambulancias_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['OID_'] !== null ? Autolinker.link(String(feature.properties['OID_'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FolderPath'] !== null ? Autolinker.link(String(feature.properties['FolderPath'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SymbolID'] !== null ? Autolinker.link(String(feature.properties['SymbolID'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['AltMode'] !== null ? Autolinker.link(String(feature.properties['AltMode'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Base'] !== null ? Autolinker.link(String(feature.properties['Base'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Snippet'] !== null ? Autolinker.link(String(feature.properties['Snippet'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PopupInfo'] !== null ? Autolinker.link(String(feature.properties['PopupInfo'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['HasLabel'] !== null ? Autolinker.link(String(feature.properties['HasLabel'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['LabelID'] !== null ? Autolinker.link(String(feature.properties['LabelID'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
+				
+				var icono = new L.Icon({
+					iconUrl: 'https://www.flaticon.es/premium-icon/icons/svg/1982/1982159.svg',
+					iconSize: [50, 50],
+					iconAnchor: [25, 50]
+				});
+				
+				var accidentalidadalta = L.marker([3.416729, -76.539979],{icon: icono}).addTo(map)
+					.bindPopup("<b>Punto de Alta Accidentalidad</b><br>Calle 9 - Carrera 44.");
+				
+						
+				var layer_Equipamientos_salud_2 = new L.geoJson(json_Equipamientos_salud_2, {
+					attribution: '',
+					pane: 'pane_Equipamientos_salud_2',
+					onEachFeature: pop_Equipamientos_salud_2,
+					style: style_Equipamientos_salud_2_0,
+				});
+				bounds_group.addLayer(layer_Equipamientos_salud_2);
+				map.addLayer(layer_Equipamientos_salud_2);
+				function pop_ambulancias_3(feature, layer) {
+					layer.on({
+						mouseout: function(e) {
+							for (i in e.target._eventParents) {
+								e.target._eventParents[i].resetStyle(e.target);
+							}
+						},
+						mouseover: highlightFeature,
+					});
+					var popupContent = '<table>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['OID_'] !== null ? Autolinker.link(String(feature.properties['OID_'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['FolderPath'] !== null ? Autolinker.link(String(feature.properties['FolderPath'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['SymbolID'] !== null ? Autolinker.link(String(feature.properties['SymbolID'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['AltMode'] !== null ? Autolinker.link(String(feature.properties['AltMode'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['Base'] !== null ? Autolinker.link(String(feature.properties['Base'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['Snippet'] !== null ? Autolinker.link(String(feature.properties['Snippet'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['PopupInfo'] !== null ? Autolinker.link(String(feature.properties['PopupInfo'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['HasLabel'] !== null ? Autolinker.link(String(feature.properties['HasLabel'])) : '') + '</td>\
+							</tr>\
+							<tr>\
+								<td colspan="2">' + (feature.properties['LabelID'] !== null ? Autolinker.link(String(feature.properties['LabelID'])) : '') + '</td>\
+							</tr>\
+						</table>';
+					layer.bindPopup(popupContent, {maxHeight: 400});
+				}
 
-        function style_ambulancias_3_0() {
-            return {
-                pane: 'pane_ambulancias_3',
-                radius: 5.6,
-                opacity: 1,
-                color: 'rgba(227,26,28,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-            }
-        }
-        function style_ambulancias_3_1() {
-            return {
-                pane: 'pane_ambulancias_3',
-                radius: 3.23076,
-                opacity: 1,
-                color: 'rgba(227,26,28,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(227,26,28,1.0)',
-            }
-        }
-        map.createPane('pane_ambulancias_3');
-        map.getPane('pane_ambulancias_3').style.zIndex = 403;
-        map.getPane('pane_ambulancias_3').style['mix-blend-mode'] = 'normal';
-        var layer_ambulancias_3 = new L.geoJson.multiStyle(json_ambulancias_3, {
-            attribution: '',
-            pane: 'pane_ambulancias_3',
-            onEachFeature: pop_ambulancias_3,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_ambulancias_3_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_ambulancias_3_1(feature));
-            },
-        ]});
-        var cluster_ambulancias_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
-        cluster_ambulancias_3.addLayer(layer_ambulancias_3);
+				function style_ambulancias_3_0() {
+					return {
+						pane: 'pane_ambulancias_3',
+						radius: 5.6,
+						opacity: 1,
+						color: 'rgba(227,26,28,1.0)',
+						dashArray: '',
+						lineCap: 'butt',
+						lineJoin: 'miter',
+						weight: 2.0,
+						fill: true,
+						fillOpacity: 1,
+						fillColor: 'rgba(255,255,255,1.0)',
+					}
+				}
+				function style_ambulancias_3_1() {
+					return {
+						pane: 'pane_ambulancias_3',
+						radius: 3.23076,
+						opacity: 1,
+						color: 'rgba(227,26,28,1.0)',
+						dashArray: '',
+						lineCap: 'butt',
+						lineJoin: 'miter',
+						weight: 1.0,
+						fill: true,
+						fillOpacity: 1,
+						fillColor: 'rgba(227,26,28,1.0)',
+					}
+				}
+				map.createPane('pane_ambulancias_3');
+				map.getPane('pane_ambulancias_3').style.zIndex = 403;
+				map.getPane('pane_ambulancias_3').style['mix-blend-mode'] = 'normal';
+				var layer_ambulancias_3 = new L.geoJson.multiStyle(json_ambulancias_3, {
+					attribution: '',
+					pane: 'pane_ambulancias_3',
+					onEachFeature: pop_ambulancias_3,
+					pointToLayers: [function (feature, latlng) {
+						var context = {
+							feature: feature,
+							variables: {}
+						};
+						return L.shapeMarker(latlng, style_ambulancias_3_0(feature));
+					},function (feature, latlng) {
+						var context = {
+							feature: feature,
+							variables: {}
+						};
+						return L.shapeMarker(latlng, style_ambulancias_3_1(feature));
+					},
+				]});
+				var cluster_ambulancias_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+					spiderfyDistanceMultiplier: 2});
+				cluster_ambulancias_3.addLayer(layer_ambulancias_3);
 
-        bounds_group.addLayer(layer_ambulancias_3);
-        cluster_ambulancias_3.addTo(map);
-		
+				bounds_group.addLayer(layer_ambulancias_3);
+				cluster_ambulancias_3.addTo(map);
+				
 
-	
-		var baseMaps = {};
-		
-        L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa1.png" /> Mapa Base 1': mapabase1,'<img src="legend/mapa2.png" /> Mapa Base 2': mapabase2barrios,'<img src="legend/mapa3.png" /> Mapa Base 3': mapabase3,'<img src="legend/ambulancias_3.png" /> perimetro':layer_perimetro_urbano}).addTo(map);
-        setBounds();
-        map.addControl(new L.Control.Search({
-            layer: cluster_ambulancias_3,
-            initial: false,
-            hideMarkerOnCollapse: true,
-            propertyName: 'Name'}));
-        document.getElementsByClassName('search-button')[0].className +=
-         ' fa fa-binoculars';
-		 
-		 //dotamos de funcionalidad al botón cargar
-		var geo_csv = {};
+			
+				var baseMaps = {};
+				
+				L.control.layers(baseMaps,{'<img src="legend/ambulancias_3.png" /> Ambulancias': cluster_ambulancias_3,'<img src="legend/Equipamientos_salud_2.png" /> Equipamientos de Salud': layer_Equipamientos_salud_2,'<img src="legend/vias_nomenclatura_1.png" /> Nomenclatura': layer_vias_nomenclatura_1,'<img src="legend/comunas_cali_0.png" /> comunas de cali': layer_comunas_cali_0,'<img src="legend/mapa1.png" /> Mapa Base 1': mapabase1,'<img src="legend/mapa2.png" /> Mapa Base 2': mapabase2barrios,'<img src="legend/mapa3.png" /> Mapa Base 3': mapabase3,'<img src="legend/ambulancias_3.png" /> perimetro':layer_perimetro_urbano}).addTo(map);
+				setBounds();
+				map.addControl(new L.Control.Search({
+					layer: cluster_ambulancias_3,
+					initial: false,
+					hideMarkerOnCollapse: true,
+					propertyName: 'Name'}));
+				document.getElementsByClassName('search-button')[0].className +=
+				 ' fa fa-binoculars';
+				 
+				 //dotamos de funcionalidad al botón cargar
+				var geo_csv = {};
 
-		function cargar() {
-		  //guardamos los cambios del usuario en sus respectivos textarea
-		  opciones_editor.save();
-		  csv_editor.save();
-		  //borramos la capa geo_csv del mapa
-		  map.removeLayer(geo_csv);
-		  //recreamos la capa con las nuevas opciones
-		  geo_csv = eval(document.getElementById('opciones').value);
-		  geo_csv.addData(document.getElementById('csv').value);
-		  map.addLayer(geo_csv);
-		}
+				function cargar() {
+				  //guardamos los cambios del usuario en sus respectivos textarea
+				  opciones_editor.save();
+				  csv_editor.save();
+				  //borramos la capa geo_csv del mapa
+				  map.removeLayer(geo_csv);
+				  //recreamos la capa con las nuevas opciones
+				  geo_csv = eval(document.getElementById('opciones').value);
+				  geo_csv.addData(document.getElementById('csv').value);
+				  map.addLayer(geo_csv);
+				}
 
-		document.getElementById('cargar').addEventListener('click', cargar, false);
+				document.getElementById('cargar').addEventListener('click', cargar, false);
 		 
 
 
